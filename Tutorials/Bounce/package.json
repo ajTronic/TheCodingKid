@@ -1,0 +1,14 @@
+{
+  "name": "bounce",
+  "version": "1.0.0",
+  "description": "Bouncing balls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thekid",
+  "license": "ISC",
+  "dependencies": {
+    "p5": "^1.3.1"
+  }
+}
