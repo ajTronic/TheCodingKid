@@ -15,17 +15,15 @@ function setup() {
 function draw() {
     background(bg);
 
-    for (let i = 0; i < 3; i++) {
-        snow.push({
-            x: random(width), y: 0,
-            xSpeed: random(-0.7, 0.3),
-            ySpeed: random(3, 5),
-            size: random(2, 9),
-        });
-    }
+    snow.push({
+        x: random(width) - 60, y: 0,
+        xSpeed: random(-0.7, 0.3),
+        ySpeed: random(3, 5),
+        size: random(2, 9),
+    });
 
     snow.forEach(flake => {
-        fill("#eff3f6")
+        fill("whitesmoke")
         circle(flake.x, flake.y, flake.size);
         flake.x += flake.xSpeed
         flake.y += flake.ySpeed
