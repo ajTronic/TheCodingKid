@@ -1,5 +1,4 @@
 # The Top 5 JavaScript Fails
----------------
 
 ## Number 5: Funny Math
 ```js
