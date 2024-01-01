@@ -1,0 +1,211 @@
+[gd_scene load_steps=26 format=3 uid="uid://bwin3qsm7662r"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_w60ll"]
+[ext_resource type="Texture2D" uid="uid://cvhhq538aiiwy" path="res://player/sprites/dead/Dead Hit 01.png" id="3_psquf"]
+[ext_resource type="Texture2D" uid="uid://bo684g3hen2vm" path="res://player/sprites/fall/Fall 01.png" id="3_vmk1e"]
+[ext_resource type="Texture2D" uid="uid://bratxry24x75q" path="res://player/sprites/dead/Dead Hit 02.png" id="4_gheeq"]
+[ext_resource type="Texture2D" uid="uid://d3fohryx5sdh2" path="res://player/sprites/dead/Dead Hit 03.png" id="5_sl0fe"]
+[ext_resource type="Texture2D" uid="uid://ic1bec016aff" path="res://player/sprites/dead/Dead Hit 04.png" id="6_vldag"]
+[ext_resource type="Texture2D" uid="uid://bfd8ba3pg3a7r" path="res://player/sprites/jump/Jump 03.png" id="8_g5r4b"]
+[ext_resource type="Texture2D" uid="uid://c5j1lcm12i27p" path="res://player/sprites/idle/Idle 01.png" id="8_ltrng"]
+[ext_resource type="Texture2D" uid="uid://bli08hmqhbfq3" path="res://player/sprites/idle/Idle 02.png" id="9_48iqx"]
+[ext_resource type="Texture2D" uid="uid://8c87o3b45qk1" path="res://player/sprites/run/Run 01.png" id="9_vkigg"]
+[ext_resource type="Texture2D" uid="uid://im7f45tb76a6" path="res://player/sprites/idle/Idle 03.png" id="10_6nqo5"]
+[ext_resource type="Texture2D" uid="uid://bk3eppsi62ivt" path="res://player/sprites/run/Run 02.png" id="10_jfk8j"]
+[ext_resource type="Texture2D" uid="uid://d0y4ii1ulpixa" path="res://player/sprites/run/Run 03.png" id="11_d2grb"]
+[ext_resource type="Texture2D" uid="uid://bgvxqa0nfafgx" path="res://player/sprites/idle/Idle 04.png" id="11_t1ngq"]
+[ext_resource type="Texture2D" uid="uid://dc3djahqwvhvv" path="res://player/sprites/idle/Idle 05.png" id="12_2rnch"]
+[ext_resource type="Texture2D" uid="uid://om8ris6np246" path="res://player/sprites/run/Run 04.png" id="12_m21nq"]
+[ext_resource type="Texture2D" uid="uid://corbruf2h00s4" path="res://player/sprites/run/Run 05.png" id="13_5th0u"]
+[ext_resource type="Texture2D" uid="uid://d3k6smsr4mvga" path="res://player/sprites/run/Run 06.png" id="14_16lj5"]
+[ext_resource type="PackedScene" uid="uid://dxm2lg4ppmedp" path="res://trail/trail.tscn" id="14_rapi5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hopgl"]
+radius = 4.0
+height = 26.99
+
+[sub_resource type="Animation" id="Animation_f2spm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mk3rn"]
+resource_name = "jump"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.01, 0.11, 0.99),
+"transitions": PackedFloat32Array(1, 0.707106, 0.435273),
+"update": 0,
+"values": [Vector2(1.05, 0.952), Vector2(0.89, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5h86y"]
+resource_name = "land"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.05, 0.15, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 0.909), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0.1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfn4k"]
+_data = {
+"RESET": SubResource("Animation_f2spm"),
+"jump": SubResource("Animation_mk3rn"),
+"land": SubResource("Animation_5h86y")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oyax7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_psquf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gheeq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sl0fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vldag")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vmk1e")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ltrng")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_48iqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6nqo5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_t1ngq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2rnch")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_g5r4b")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vkigg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jfk8j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_d2grb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_m21nq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5th0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_16lj5")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_w60ll")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("CapsuleShape2D_hopgl")
+debug_color = Color(0.2, 0.196078, 0.239216, 0.2)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_qfn4k")
+}
+
+[node name="Trail" parent="." instance=ExtResource("14_rapi5")]
+width = 2.0
+default_color = Color(0.199219, 0.195313, 0.238281, 1)
+SIZE = 50
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+sprite_frames = SubResource("SpriteFrames_oyax7")
+animation = &"idle"

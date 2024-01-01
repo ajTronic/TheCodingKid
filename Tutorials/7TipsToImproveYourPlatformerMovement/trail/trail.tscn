@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxm2lg4ppmedp"]
+
+[ext_resource type="Script" path="res://trail/trail.gd" id="1_47kq7"]
+
+[sub_resource type="Curve" id="Curve_1glh2"]
+_data = [Vector2(0.0130293, 0), 0.0, 0.0, 0, 0, Vector2(0.355049, 0.642105), 0.709371, 0.709371, 0, 0, Vector2(0.941368, 0.947368), 0.0, 0.0, 0, 0, Vector2(0.986971, 0.947368), 1.4, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_x1plo"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.992424)
+colors = PackedColorArray(0.863281, 0.773438, 0.628906, 1, 0.480469, 0.480469, 0.667969, 1)
+
+[node name="Trail" type="Line2D"]
+top_level = true
+z_index = -1
+points = PackedVector2Array(29, 21)
+width = 1.5
+width_curve = SubResource("Curve_1glh2")
+gradient = SubResource("Gradient_x1plo")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 3.0
+round_precision = 5
+antialiased = true
+script = ExtResource("1_47kq7")
+SIZE = 30
+SMOOTHING = 0.3
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
