@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctxhoyoq7noph"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_r20t4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0q07k"]
+radius = 10.0499
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_r20t4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0q07k")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.599833, 1, 0.51, 1)
+polygon = PackedVector2Array(0, -10, 4, -9, 8, -6, 10, -3, 10, 2, 8, 6, 5, 9, 0, 10, -4, 9, -7, 7, -9, 4, -10, 0, -9, -4, -6, -8)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

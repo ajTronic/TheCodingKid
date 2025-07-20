@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvnqhecljptxo"]
+
+[ext_resource type="PackedScene" uid="uid://cwu3x5ciplkqh" path="res://scenes/player.tscn" id="1_wg05u"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_xrg4b"]
+
+[sub_resource type="Environment" id="Environment_amyqu"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 0
+glow_hdr_threshold = 0.77
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lonrp"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yc7s2"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_j7b27"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iddry"]
+distance = -648.0
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_xrg4b")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_amyqu")
+
+[node name="Player" parent="." instance=ExtResource("1_wg05u")]
+position = Vector2(563, 342)
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("WorldBoundaryShape2D_lonrp")
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("WorldBoundaryShape2D_yc7s2")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1151, 1)
+shape = SubResource("WorldBoundaryShape2D_j7b27")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+shape = SubResource("WorldBoundaryShape2D_iddry")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
